@@ -1,16 +1,8 @@
 using UnityEngine;
 
-public class Sample : MonoBehaviour
+namespace Twwya
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+    public class Sample : MonoBehaviour
     {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
     }
 }
