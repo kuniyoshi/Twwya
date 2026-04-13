@@ -1,3 +1,6 @@
 {
-	"name": "Twwya"
+	"name": "Twwya",
+	"references": [
+		"UniTask"
+	]
 }
