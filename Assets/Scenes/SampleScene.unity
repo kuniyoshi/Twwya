@@ -519,6 +519,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Twwya::Twwya.Cue
   cueName: Cue
   text: Cue
+  lyricText: {fileID: 1800000014}
   duration: 2
   overlapBeforeNext: 0.25
   playOnEnable: 1
@@ -588,7 +589,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Twwya::Twwya.Sample
   sequence: {fileID: 293871164}
-  lyricText: {fileID: 1800000014}
   playOnStart: 1
 --- !u!1 &1800000001
 GameObject:
