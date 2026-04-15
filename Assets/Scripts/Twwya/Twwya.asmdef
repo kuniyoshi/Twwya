@@ -1,6 +1,7 @@
 {
 	"name": "Twwya",
 	"references": [
-		"UniTask"
+		"UniTask",
+		"Unity.TextMeshPro"
 	]
 }
