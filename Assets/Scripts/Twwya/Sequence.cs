@@ -23,6 +23,7 @@ namespace Twwya
         public UnityEvent SequenceCompleted = new();
 
         private CancellationTokenSource? playbackCancellationTokenSource;
+        private Cue? currentCue;
 
         public IReadOnlyList<Cue> Cues => cues;
 
@@ -57,6 +58,7 @@ namespace Twwya
             playbackCancellationTokenSource.Cancel();
             playbackCancellationTokenSource.Dispose();
             playbackCancellationTokenSource = null;
+            ClearCurrentCueText();
         }
 
         public async UniTask PlayAsync(CancellationToken cancellationToken = default)
@@ -88,6 +90,7 @@ namespace Twwya
                 }
 
                 await UniTask.WhenAll(playingCueTasks);
+                ClearCurrentCueText();
                 SequenceCompleted.Invoke();
             }
             catch (OperationCanceledException) when (linkedTokenSource.IsCancellationRequested)
@@ -106,9 +109,29 @@ namespace Twwya
 
         private async UniTask PlayCueAsync(Cue cue, int cueIndex, CancellationToken cancellationToken)
         {
+            currentCue = cue;
+            cue.ShowText();
             CueStarted.Invoke(cue, cueIndex);
             await cue.PlayAsync(cancellationToken);
+
+            if (ReferenceEquals(currentCue, cue))
+            {
+                cue.ClearText();
+                currentCue = null;
+            }
+
             CueCompleted.Invoke(cue, cueIndex);
+        }
+
+        private void ClearCurrentCueText()
+        {
+            if (currentCue == null)
+            {
+                return;
+            }
+
+            currentCue.ClearText();
+            currentCue = null;
         }
     }
 }
